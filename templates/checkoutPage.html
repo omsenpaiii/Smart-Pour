@@ -1,0 +1,22 @@
+<!-- code checkoutPage -->
+<div id="qualityQuantityPage" class="hidden mt-10 px-4">
+    <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Select Quality & Quantity</h2>
+    
+    <div id="qualityInfo" class="text-center mb-6">
+        <!-- The quality description will be dynamically updated here based on the product selection -->
+    </div>
+
+    <div class="flex justify-center mb-6">
+        <label for="quantity" class="text-blue-600 font-medium mr-4">Quantity:</label>
+        <input type="range" id="quantity" min="50" max="1000" step="50" class="w-64" value="50">
+        <span id="selectedQuantity" class="ml-4 text-blue-600 font-medium">50 ml</span>
+    </div>
+    
+    <div class="text-center mb-4">
+        <span id="totalPrice" class="text-2xl text-blue-600 font-semibold">₹20</span>
+    </div>
+    
+    <div class="text-center mb-6">
+        <button id="proceedToPayment" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Proceed to Payment</button>
+    </div>
+  </div>

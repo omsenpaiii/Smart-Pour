@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Pour</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- code for loadingPage -->
+  <div id="loadingPage">
+    <h1>Smart Pour</h1>
+    <div id="animationContainer"></div>
+  </div>
+
+  <!-- code for productPage -->
+  <div id="productPage" class="hidden mt-10 px-4">
+    <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Select Your Milk Type</h2>
+    <div class="flex flex-col md:flex-row md:justify-between flex-wrap justify-center gap-5">
+        
+      <div class="product-card max-w-xs md:max-w-[calc(50%-20px)] w-full bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition" data-product="type1">
+            <img src="path_to_image1.jpg" alt="Milk Type 1 Image" class="w-full h-auto mb-4 rounded">
+            <h3 class="text-lg mb-2 font-medium text-blue-500">Low-Fat Milk</h3>
+            <p class="text-sm mb-2 text-gray-700">Low fat milk, perfect for diet routines.</p>
+            <p class="font-bold text-blue-600">₹20 per 100ml</p>
+        </div>
+
+        <div class="product-card max-w-xs md:max-w-[calc(50%-20px)] w-full bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition" data-product="type2">
+            <img src="path_to_image2.jpg" alt="Milk Type 2 Image" class="w-full h-auto mb-4 rounded">
+            <h3 class="text-lg mb-2 font-medium text-blue-500">High-Fat Milk</h3>
+            <p class="text-sm mb-2 text-gray-700">Pure milk with added vitamins.</p>
+            <p class="font-bold text-blue-600">₹22 per 100ml</p>
+        </div>
+
+        <div class="product-card max-w-xs md:max-w-[calc(50%-20px)] w-full bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition" data-product="type3">
+            <img src="path_to_image3.jpg" alt="Milk Type 3 Image" class="w-full h-auto mb-4 rounded">
+            <h3 class="text-lg mb-2 font-medium text-blue-500">Chocolate Flavored Milk</h3>
+            <p class="text-sm mb-2 text-gray-700">Fresh and Creamy, straight from the farm.</p>
+            <p class="font-bold text-blue-600">₹18 per 100ml</p>
+        </div>
+
+        <div class="product-card max-w-xs md:max-w-[calc(50%-20px)] w-full bg-white border p-4 rounded-lg shadow-md hover:shadow-lg transition" data-product="type4">
+            <img src="path_to_image4.jpg" alt="Milk Type 4 Image" class="w-full h-auto mb-4 rounded">
+            <h3 class="text-lg mb-2 font-medium text-blue-500">Strawberry Flavored Milk</h3>
+            <p class="text-sm mb-2 text-gray-700">High fat organic milk with a rich taste.</p>
+            <p class="font-bold text-blue-600">₹24 per 100ml</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- code checkoutPage -->
+    <div id="qualityQuantityPage" class="hidden mt-10 px-4">
+      <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Select Quality & Quantity</h2>
+      
+      <div id="qualityInfo" class="text-center mb-6">
+          <!-- The quality description will be dynamically updated here based on the product selection -->
+      </div>
+
+      <div class="flex justify-center mb-6">
+          <label for="quantity" class="text-blue-600 font-medium mr-4">Quantity:</label>
+          <input type="range" id="quantity" min="50" max="1000" step="50" class="w-64" value="50">
+          <span id="selectedQuantity" class="ml-4 text-blue-600 font-medium">50 ml</span>
+      </div>
+      
+      <div class="text-center mb-4">
+          <span id="totalPrice" class="text-2xl text-blue-600 font-semibold">₹20</span>
+      </div>
+      
+      <div class="text-center mb-6">
+          <button id="proceedToPayment" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Proceed to Payment</button>
+      </div>
+    </div>
+
+  <!-- ... scripts ... -->
+  <!-- Add Firebase scripts to your web app project -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

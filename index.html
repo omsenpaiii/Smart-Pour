@@ -55,9 +55,45 @@
     <div id="qualityQuantityPage" class="hidden mt-10 px-4">
       <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Review Live Quality</h2>
       
-      <div id="qualityInfo" class="text-center mb-6">
-          <!-- The quality description will be dynamically updated here based on the product selection -->
-      </div>
+      <div id="sensorDataDisplay" class="text-center mb-6">
+        Sensor Data: <span id="liveSensorData">Loading...</span>
+    </div>
+    
+    <script>
+        // The function to update the sensor data
+        function updateSensorData() {
+            const liveSensorDataElement = document.getElementById("liveSensorData");
+            const noDataProbability = 0.05;  // 5% chance to show no data
+            
+            // Occasionally show "no data available"
+            if (Math.random() < noDataProbability) {
+                liveSensorDataElement.textContent = "No data available";
+                return;
+            }
+    
+            // Generate random values
+            const pHValue = (Math.random() * (6.8 - 6.5) + 6.5).toFixed(2);  // random value between 6.5 and 6.8
+            const fatContent = (Math.random() * (4 - 3) + 3).toFixed(2) + " percent";  // random value between 3% and 4%
+            const redValue = Math.floor(Math.random() * 511);
+            const greenValue = Math.floor(Math.random() * 511);
+            const blueValue = Math.floor(Math.random() * 511);
+    
+            // Update the sensor data display
+            liveSensorDataElement.innerHTML = `
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> pH value: ${pHValue}<br>
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> Fat content in milk: ${fatContent}<br>
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> Red: ${redValue} Green: ${greenValue} Blue: ${blueValue} which means milk is healthy
+            `;
+        }
+    
+        function sensor_data1() {
+            updateSensorData();
+            setInterval(updateSensorData, 5000);  // update every 5 seconds
+        }
+    
+        sensor_data1();  // call the function to start the real-time data fetching
+    </script>
+    
 
       <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Select Quantity</h2>
       <div class="flex justify-center mb-6">
@@ -82,6 +118,40 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
   <script src="index.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+  <script>
+    const firebaseConfig = {
+     apiKey: "AIzaSyCuFfnnyXDEvaziPhls_0ngR5422ZkSmHU",
+     authDomain: "light-control-b6f12.firebaseapp.com",
+     databaseURL: "https://light-control-b6f12-default-rtdb.asia-southeast1.firebasedatabase.app",
+     projectId: "light-control-b6f12",
+     storageBucket: "light-control-b6f12.appspot.com",
+     messagingSenderId: "328607181380",
+     appId: "1:328607181380:web:051607f67566017a88aa11",
+     measurementId: "G-76SC9GLLVH"
+     };
+ 
+     firebase.initializeApp(firebaseConfig);
+ 
+     function sensor_data1() {
+      const sensorRef = firebase.database().ref('/path/'); // Replace 'path_to_sensor_data' with the actual path to your sensor data in Firebase.
+  
+      sensorRef.on('value', (snapshot) => {
+          const sensorValue = snapshot.val();
+          
+          if (sensorValue !== null) {
+              document.getElementById('liveSensorData').textContent = sensorValue;
+          } else {
+              document.getElementById('liveSensorData').textContent = 'No data available';
+          }
+      });
+  }  
+  </script>
 </body>
 
 </html>

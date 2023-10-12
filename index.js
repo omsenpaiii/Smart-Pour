@@ -10,7 +10,7 @@ let animation = lottie.loadAnimation({
 setTimeout(() => {
     document.getElementById('loadingPage').style.display = 'none';
     document.getElementById('productPage').style.display = 'block';
-}, 70); // increase time to 7000
+}, 7000); // increase time to 7000
 
 // Your product data
 const products = {

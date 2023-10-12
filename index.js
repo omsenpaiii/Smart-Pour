@@ -86,3 +86,61 @@ document.getElementById('proceedToPayment').addEventListener('click', function()
     // TODO: Here you can initiate the Stripe payment with the quantity and selected milk type data
     // After Stripe payment success, send the data to Firebase (this will be covered in a later step)
 });
+
+const paymentLinks = {
+    type1: 'https://buy.stripe.com/9AQbKueND0aXgw0dQQ',
+    type2: 'https://buy.stripe.com/9AQ9CmcFve1Ngw0145',
+    type3: 'https://buy.stripe.com/5kAbKufRH9Lxa7CfZ0',
+    type4: 'https://buy.stripe.com/bIY5m6eND4rd6VqcMP',
+};
+
+document.getElementById('proceedToPayment').addEventListener('click', function() {
+    const selectedMilkType = localStorage.getItem('selectedMilkType');
+    const paymentLink = paymentLinks[selectedMilkType];
+
+    if (paymentLink) {
+        window.location.href = paymentLink;
+    } else {
+        console.error("Invalid product type or payment link not found.");
+    }
+});
+
+const admin = require('firebase-admin');
+
+const serviceAccount = require('8OpbAUXiqHPGdIVFu1jAkJ7X6vrLZsU2BYwuT17X');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://smart-pour-default-rtdb.asia-southeast1.firebasedatabase.app'  // replace with your database URL
+});
+
+app.post('/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, 'whsec_7CQrCtbj2gYN6mLa01WRDC7YbzFNqJNE');
+    } catch (err) {
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+
+        // Extract necessary data from the session
+        const { amount_total, currency, payment_status, metadata } = session;
+        
+        // Send metadata to Firebase
+        const db = admin.firestore();
+        await db.collection('payments').add({
+            amount: amount_total,
+            currency,
+            status: payment_status,
+            metadata,
+            timestamp: admin.firestore.FieldValue.serverTimestamp()
+        });
+    }
+
+    res.status(200).send('Received');
+});

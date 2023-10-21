@@ -71,7 +71,12 @@
                 return;
             }
     
-            
+            // Generate random values
+            const pHValue = (Math.random() * (2.8 - 3.5) + 1.5).toFixed(2);  // random value between 6.5 and 6.8
+            const fatContent = (Math.random() * (4 - 3) + 3).toFixed(2) + " percent";  // random value between 3% and 4%
+            const redValue = Math.floor(Math.random() * 511);
+            const greenValue = Math.floor(Math.random() * 511);
+            const blueValue = Math.floor(Math.random() * 511);
     
             // Update the sensor data display
             liveSensorDataElement.innerHTML = `

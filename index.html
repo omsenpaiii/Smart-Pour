@@ -74,9 +74,9 @@
             // Generate random values
             const pHValue = (Math.random() * (6.8 - 6.5) + 6.5).toFixed(2);  // random value between 6.5 and 6.8
             const fatContent = (Math.random() * (4 - 3) + 3).toFixed(2) + " percent";  // random value between 3% and 4%
-            const redValue = Math.floor(Math.random() * 511);
-            const greenValue = Math.floor(Math.random() * 511);
-            const blueValue = Math.floor(Math.random() * 511);
+            const redValue = Math.floor(Math.random() * 31);
+            const greenValue = Math.floor(Math.random() * 41);
+            const blueValue = Math.floor(Math.random() * 21);
     
             // Update the sensor data display
             liveSensorDataElement.innerHTML = `
@@ -126,14 +126,14 @@
 
   <script>
     const firebaseConfig = {
-     apiKey: "AIzaSyCuFfnnyXDEvaziPhls_0ngR5422ZkSmHU",
-     authDomain: "light-control-b6f12.firebaseapp.com",
-     databaseURL: "https://light-control-b6f12-default-rtdb.asia-southeast1.firebasedatabase.app",
-     projectId: "light-control-b6f12",
-     storageBucket: "light-control-b6f12.appspot.com",
-     messagingSenderId: "328607181380",
-     appId: "1:328607181380:web:051607f67566017a88aa11",
-     measurementId: "G-76SC9GLLVH"
+      apiKey: "AIzaSyAyf3ZgrnVoKrE5GUTnxUD6XR3wDgXzhYQ",
+      authDomain: "smart-pour.firebaseapp.com",
+      databaseURL: "https://smart-pour-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "smart-pour",
+      storageBucket: "smart-pour.appspot.com",
+      messagingSenderId: "1018883514152",
+      appId: "1:1018883514152:web:96ec3ef298d85458f73a1d",
+      measurementId: "G-DP52B46X9R"
      };
  
      firebase.initializeApp(firebaseConfig);

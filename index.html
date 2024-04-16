@@ -60,47 +60,39 @@
     </div>
     
     <script>
-      // The function to update the sensor data
-      function updateSensorData() {
-          const liveSensorDataElement = document.getElementById("liveSensorData");
-          const noDataProbability = 0.05;  // 5% chance to show no data
-          
-          // Occasionally show "no data available"
-          if (Math.random() < noDataProbability) {
-              liveSensorDataElement.textContent = "No data available";
-              return;
-          }
-  
-          // Create a single Date object for consistency
-          const currentTime = new Date();
-          const currentTimeString = currentTime.toLocaleTimeString([], { hour12: true });
-  
-          // Generate random values within specified ranges
-          const pHValue = (Math.random() * (6.8 - 6.4) + 6.4).toFixed(2);  // random value between 6.4 and 6.8
-          const fatContent = (Math.random() * (3.8 - 3.2) + 3.2).toFixed(2) + "%";  // random value between 3.2% and 3.8%
-          const proteinLevel = (Math.random() * (3.5 - 3.0) + 3.0).toFixed(2) + "%";  // random value between 3.0% and 3.5%
-          const lactoseContent = (Math.random() * (5.0 - 4.5) + 4.5).toFixed(2) + "%";  // random value between 4.5% and 5.0%
-          const optimalTemperature = (Math.random() * (4 - 2) + 2).toFixed(2) + "°C";  // random value between 2°C and 4°C
-  
-          // Update the sensor data display
-          liveSensorDataElement.innerHTML = `
-              ${currentTimeString} -> pH value: ${pHValue}<br>
-              ${currentTimeString} -> Fat content in milk: ${fatContent}<br>
-              ${currentTimeString} -> Protein level: ${proteinLevel}<br>
-              ${currentTimeString} -> Lactose content: ${lactoseContent}<br>
-              ${currentTimeString} -> Optimal temperature: ${optimalTemperature}<br>
-          `;
-      }
-  
-      function sensor_data1() {
-          updateSensorData();
-          setInterval(updateSensorData, 5000);  // update every 5 seconds
-      }
-  
-      sensor_data1();  // call the function to start the real-time data fetching
-  </script>
-  
-  
+        // The function to update the sensor data
+        function updateSensorData() {
+            const liveSensorDataElement = document.getElementById("liveSensorData");
+            const noDataProbability = 0.05;  // 5% chance to show no data
+            
+            // Occasionally show "no data available"
+            if (Math.random() < noDataProbability) {
+                liveSensorDataElement.textContent = "No data available";
+                return;
+            }
+    
+            // Generate random values
+            const pHValue = (Math.random() * (6.8 - 6.5) + 6.5).toFixed(2);  // random value between 6.5 and 6.8
+            const fatContent = (Math.random() * (4 - 3) + 3).toFixed(2) + " percent";  // random value between 3% and 4%
+            const redValue = Math.floor(Math.random() * 511);
+            const greenValue = Math.floor(Math.random() * 511);
+            const blueValue = Math.floor(Math.random() * 511);
+    
+            // Update the sensor data display
+            liveSensorDataElement.innerHTML = `
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> pH value: ${pHValue}<br>
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> Fat content in milk: ${fatContent}<br>
+                ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()} -> Red: ${redValue} Green: ${greenValue} Blue: ${blueValue} which means milk is healthy
+            `;
+        }
+    
+        function sensor_data1() {
+            updateSensorData();
+            setInterval(updateSensorData, 5000);  // update every 5 seconds
+        }
+    
+        sensor_data1();  // call the function to start the real-time data fetching
+    </script>
     
 
       <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Select Quantity</h2>
@@ -111,7 +103,7 @@
       </div>
       
       <div class="text-center mb-4">
-          <span id="totalPrice" class="text-2xl text-blue-600 font-semibold">₹20</span>
+          <span id="totalPrice" class="text-2xl text-blue-600 font-semibold">₹10</span>
       </div>
       
       <div class="text-center mb-6">
@@ -134,14 +126,14 @@
 
   <script>
     const firebaseConfig = {
-     apiKey: "AIzaSyCuFfnnyXDEvaziPhls_0ngR5422ZkSmHU",
-     authDomain: "light-control-b6f12.firebaseapp.com",
-     databaseURL: "https://light-control-b6f12-default-rtdb.asia-southeast1.firebasedatabase.app",
-     projectId: "light-control-b6f12",
-     storageBucket: "light-control-b6f12.appspot.com",
-     messagingSenderId: "328607181380",
-     appId: "1:328607181380:web:051607f67566017a88aa11",
-     measurementId: "G-76SC9GLLVH"
+      apiKey: "AIzaSyAyf3ZgrnVoKrE5GUTnxUD6XR3wDgXzhYQ",
+      authDomain: "smart-pour.firebaseapp.com",
+      databaseURL: "https://smart-pour-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "smart-pour",
+      storageBucket: "smart-pour.appspot.com",
+      messagingSenderId: "1018883514152",
+      appId: "1:1018883514152:web:96ec3ef298d85458f73a1d",
+      measurementId: "G-DP52B46X9R"
      };
  
      firebase.initializeApp(firebaseConfig);

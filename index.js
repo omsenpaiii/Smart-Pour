@@ -12,7 +12,7 @@ setTimeout(() => {
     document.getElementById('productPage').style.display = 'block';
 }, 8000); // increase time to 7000
 
-// Your product data
+// Our product data
 const products = {
     type1: {
         quality: 'Low fat milk, perfect for diet routines.',
@@ -59,6 +59,15 @@ document.querySelectorAll('.product-card').forEach(productCard => {
         updateTotalPrice(50);
     });
 });
+
+// Handle the back button click event
+document.getElementById('goBackButton').addEventListener('click', function() {
+    // Hide the quality & quantity page
+    document.getElementById('qualityQuantityPage').style.display = 'none';
+    // Show the product page
+    document.getElementById('productPage').style.display = 'block';
+});
+
 
 // Handle Quantity and Price Display
 const quantityInput = document.getElementById('quantity');

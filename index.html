@@ -54,6 +54,7 @@
 
     <!-- code checkoutPage -->
     <div id="qualityQuantityPage" class="hidden mt-10 px-4">
+      <button id="goBackButton" class="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Back</button>
     <h1 class="text-center text-2xl mb-6 font-bold text-green-600">Smart Pour</h1>
       <h2 class="text-center text-2xl mb-6 font-semibold text-blue-600">Review Live Quality</h2>
       
@@ -65,7 +66,7 @@
       // The function to update the sensor data
       function updateSensorData() {
           const liveSensorDataElement = document.getElementById("liveSensorData");
-          const noDataProbability = 0.05;  // 5% chance to show no data
+          const noDataProbability = 0.05;
           
           // Occasionally show "no data available"
           if (Math.random() < noDataProbability) {
